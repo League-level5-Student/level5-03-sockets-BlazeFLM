@@ -8,7 +8,7 @@ public class ClientGreeter {
    public static void main(String [] args) {
 	  //1. Create a String for the ip address of the server. 
 	  // If you don't know how to find a computer's ip address, ask about ifconfig on linux/mac and ipconfig on windows.
-      
+      String ipaddr; //started already i skipped ahead
       //2. Create an integer for the server's port number
       
       //3. Surround steps 4-9 in a try-catch block that catches any IOExceptions.
@@ -23,7 +23,7 @@ public class ClientGreeter {
          
          //8. Use the DataInputStream object to print a message from the server using the readUTF() method.
          
-         //9. Close the client's server object
+			// 9. Close the client's server object
 
-   }
+		}
 }
