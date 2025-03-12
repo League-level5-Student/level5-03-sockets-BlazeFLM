@@ -1,4 +1,4 @@
-package _00_Click_Chat.networking;
+package _02_Chat_Application;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
 
 public class Server {
 	private int port;
-
+	
 	private ServerSocket server;
-	private Socket connection;
+	private Socket sock;
 
-	ObjectOutputStream os;
-	ObjectInputStream is;
+	ObjectOutputStream oos;
+	ObjectInputStream ois;
 
 	public Server(int port) {
 		this.port = port;
@@ -27,49 +27,48 @@ public class Server {
 	public void start() {
 		try {
 			server = new ServerSocket(port, 100);
+			sock = server.accept();
 
-			connection = server.accept();
+			oos = new ObjectOutputStream(sock.getOutputStream());
+			ois = new ObjectInputStream(sock.getInputStream());
 
-			os = new ObjectOutputStream(connection.getOutputStream());
-			is = new ObjectInputStream(connection.getInputStream());
+			oos.flush();
 
-			os.flush();
-
-			while (connection.isConnected()) {
+			while (sock.isConnected()) {
 				try {
-					JOptionPane.showMessageDialog(null, is.readObject());
-					System.out.println(is.readObject());
+					JOptionPane.showMessageDialog(null, ois.readObject());
+					System.out.println(ois.readObject());
 				} catch (EOFException e) {
 					JOptionPane.showMessageDialog(null, "Connection Lost");
 					System.exit(0);
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public String getIPAddress() {
 		try {
 			return InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
-			return "ERROR!!!!!";
+			return "Error";
 		}
 	}
-
+	
 	public int getPort() {
 		return port;
 	}
-
-	public void sendClick() {
+	
+	public void sendClick() { // Do clicks for now but make sure to change later for words
 		try {
-			if (os != null) {
-				os.writeObject("CLICK SENT FROM SERVER");
-				os.flush();
+			if (oos != null) {
+				oos.writeObject("Click sent by server");
+				oos.flush();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 }
