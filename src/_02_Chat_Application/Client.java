@@ -45,10 +45,10 @@ public class Client {
 
 	}
 
-	public void sendClick() { // Do clicks for now but make sure to change later for words
+	public void sendMessage(String message) { 
 		try {
 			if (oos != null) {
-				oos.writeObject("Click from client");
+				oos.writeObject(message);
 				oos.flush();
 			}
 		} catch (IOException e) {

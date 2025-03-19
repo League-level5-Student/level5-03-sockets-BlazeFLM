@@ -8,6 +8,7 @@ import _00_Click_Chat.networking.Client;
 import _00_Click_Chat.networking.Server;
 
 public class ButtonClicker extends JFrame {
+
 	JButton button = new JButton("CLICK");
 
 	Server server;

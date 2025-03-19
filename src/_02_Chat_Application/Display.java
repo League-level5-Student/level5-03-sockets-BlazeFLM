@@ -16,6 +16,8 @@ public class Display implements ActionListener {
 	JTextField field;
 	JButton button;
 	JLabel displayText;
+	
+	ChatApp app;
 
 	public Display() {
 		frame = new JFrame("Simple Chat Application");
@@ -48,6 +50,8 @@ public class Display implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(button)) {
 			//send field.getText() somewhere
+			
+			field.setText(null);
 		}
 		
 	}

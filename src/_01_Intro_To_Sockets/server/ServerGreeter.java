@@ -13,7 +13,7 @@ public class ServerGreeter extends Thread {
 		//*OPTIONAL* you can set a time limit for the server to wait by using the 
 		//  ServerSocket's setSoTimeout(int timeInMilliSeconds) method
 	}
-
+	
 	public void run() {
 		//3. Create a boolean variable and initialize it to true.
 		boolean v = true;

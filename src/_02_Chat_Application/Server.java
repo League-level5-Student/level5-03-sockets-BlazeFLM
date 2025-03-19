@@ -60,10 +60,10 @@ public class Server {
 		return port;
 	}
 	
-	public void sendClick() { // Do clicks for now but make sure to change later for words
+	public void sendMessage(String message) { 
 		try {
 			if (oos != null) {
-				oos.writeObject("Click sent by server");
+				oos.writeObject(message);
 				oos.flush();
 			}
 		} catch (IOException e) {
