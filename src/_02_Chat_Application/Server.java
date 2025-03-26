@@ -31,15 +31,15 @@ public class Server {
 
 			oos = new ObjectOutputStream(sock.getOutputStream());
 			ois = new ObjectInputStream(sock.getInputStream());
-
 			oos.flush();
 
 			while (sock.isConnected()) {
 				try {
-					JOptionPane.showMessageDialog(null, ois.readObject());
-					System.out.println(ois.readObject());
+					String message = (String) ois.readObject();
+					//JOptionPane.showMessageDialog(null, "Client: " + message);
+					System.out.println(message);
 				} catch (EOFException e) {
-					JOptionPane.showMessageDialog(null, "Connection Lost");
+					JOptionPane.showMessageDialog(null, "Connection lost");
 					System.exit(0);
 				}
 			}

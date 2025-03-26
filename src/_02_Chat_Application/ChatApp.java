@@ -11,21 +11,32 @@ public class ChatApp {
 	Server server;
 	Client client;
 	private int port = 8080;
-	
+	private boolean isServer;
+
 	public ChatApp() {
-		int response = JOptionPane.showConfirmDialog(null, "Would you like to host the server?", "Chat App", JOptionPane.YES_NO_OPTION);
-		if(response == JOptionPane.YES_OPTION) {
-			//server = new Server(port);
-			//server.sendMessage("");
-			server.start();
+		int response = JOptionPane.showConfirmDialog(null, "Would you like to host a chat?", "Chat App",
+				JOptionPane.YES_NO_OPTION);
+		if (response == JOptionPane.YES_OPTION) {
+			isServer = true;
+			server = new Server(port);
+			new Thread(() -> server.start()).start();
 		} else {
+			isServer = false;
 			String ip = JOptionPane.showInputDialog("Enter server IP address:");
 			client = new Client(ip, port);
-			client.start();
+			new Thread(() -> client.start()).start();
+		}
+	}
+
+	public void chat(String msg) {
+		if (isServer && server != null) {
+			server.sendMessage(msg);
+		} else if (!isServer && client != null) {
+			client.sendMessage(msg);
 		}
 	}
 	
-	public void chat() {
-		
+	public boolean getIsServer() {
+		return isServer;
 	}
 }

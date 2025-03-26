@@ -36,8 +36,9 @@ public class Client {
 
 		while (sock.isConnected()) {
 			try {
-				JOptionPane.showMessageDialog(null, ois.readObject());
-				System.out.println(ois.readObject());
+				String message = (String) ois.readObject();
+				//JOptionPane.showMessageDialog(null, "Server: " + message);
+				System.out.println(message);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -45,7 +46,7 @@ public class Client {
 
 	}
 
-	public void sendMessage(String message) { 
+	public void sendMessage(String message) {
 		try {
 			if (oos != null) {
 				oos.writeObject(message);
